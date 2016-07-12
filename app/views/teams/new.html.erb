@@ -7,9 +7,9 @@
 
   <%= f.submit %>
 
-  <% if @team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+      <% if @team.errors.any? %>
+        <%= render partial: 'shared/validation_errors', locals: { model: @team} %>
+      <% end %>
 
       <ul>
         <% @team.errors.full_messages.each do |msg| %>
