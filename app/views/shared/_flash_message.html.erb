@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="messages col-md-6 col-md-offset-3">
+    <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: "card flash #{key} text-xs-center" %>
+    <% end %>
+  </div>
+</div>
+

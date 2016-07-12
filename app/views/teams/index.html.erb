@@ -1,7 +1,31 @@
-<h1>Teams</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="teams card card-inverse" style="background-color: #333; border-color: #xxx;">
 
-<%= link_to 'New Team', new_team_path %>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="card-title">Teams</h4>
+          </div>
+          <div class="col-md-6">
+            <%= link_to 'New Team', new_team_path, class: 'pull-xs-right' %>
+          </div>
+        </div>
+      </div>
 
-<% @teams.each do |team| %>
-  <p><%= team.name %></p>
-<% end %>
+      <div class="card-block">
+        <table class='table'>
+          <tr>
+            <th>Name</th>
+          </tr>
+          <% @teams.each do |team| %>
+            <tr>
+              <td><%= team.name %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
