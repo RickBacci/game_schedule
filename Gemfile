@@ -6,8 +6,14 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-# gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
+gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'autoprefixer-rails'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
+
 # gem 'turbolinks', '~> 5'
 
 # Use Redis adapter to run Action Cable in production
