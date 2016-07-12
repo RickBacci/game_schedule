@@ -1,0 +1,38 @@
+@import "bootstrap";
+
+body {
+  background-color: grey;
+}
+
+.card {
+  background-color: #333;
+  border-width: 5px;
+  border-radius: 10px;
+  border-color: black;
+  color: white;
+}
+
+.messages {
+  min-height: 30px;
+}
+
+.error {
+  background-color: red;
+  border-width: 1px;
+  margin: 1em 0 1em 0
+}
+
+.notice {
+  background-color: green;
+  border-width: 1px;
+  margin: 1rem 0 1rem 0
+}
+
+.validation_error {
+
+  background-color: red;
+  margin: 1rem;
+  border-width: 5px;
+  border-radius: 10px;
+  border-color: black;
+}
