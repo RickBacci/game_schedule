@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  resources :teams, only: [:index, :new, :create] do
-    resources :games, only: [:index, :new, :create]
+  resources :teams, only: [:index, :new, :create, :show] do
+    resources :games, only: [:new, :create]
   end
 
 
