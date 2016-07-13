@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="teams card card-inverse" style="background-color: #333; border-color: #xxx;">
+
+      <div class="card-block">
+
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="card-title"><%= @team.name %></h4>
+          </div>
+
+          <div class="col-md-6">
+            <%= link_to 'Back', teams_path, class: 'pull-xs-right' %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            Current games
+          </div>
+          <div class="col-md-6">
+            <%= link_to 'Add Game', new_team_game_path(@team), class: 'pull-xs-right' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-block">
+        <table class='table'>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Field</th>
+          </tr>
+          <%- @team.games.each do |game| %>
+            <tr>
+              <td><%= game.date.strftime("%m/%d/%Y") %></td>
+              <td><%= game.time.strftime("%I:%M%p") %></td>
+              <td><%= game.field %></td>
+            </tr>
+          <% end %>
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+

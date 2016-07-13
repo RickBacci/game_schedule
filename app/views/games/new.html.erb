@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="card">
+
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="card-title">New Game</h4>
+          </div>
+          <div class="col-md-6">
+            <%= link_to 'back', teams_path, class: 'pull-xs-right' %>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card-block">
+
+        <%= form_for [@team, @game] do |f| %>
+
+          <% if @team && @team.errors.any? %>
+            <%= render partial: 'shared/validation_errors', locals: { model: @game} %>
+          <% end %>
+
+          <div class='form-group'>
+            <%= f.label :date, class: 'text-center' %>
+            <%= f.date_field :date, class: 'form-control' %>
+
+            <%= f.label :time, class: 'text-center' %>
+            <%= f.time_field :time, class: 'form-control' %>
+
+            <%= f.label :field, class: 'text-center' %>
+            <%= f.text_field :field, class: 'form-control' %>
+
+            <%= f.hidden_field :team_id, value: @team.id, class: 'form-control' if @team %>
+            <br>
+            <%= f.submit 'Create Game', class: "form-control btn btn-primary" %>
+          </div>
+        <% end %>
+
+      </div>
+
+      <% if @game.errors.any? %>
+        <%= render partial: 'shared/validation_errors', locals: { model: @game} %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
