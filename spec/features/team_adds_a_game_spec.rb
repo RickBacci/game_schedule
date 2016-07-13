@@ -18,28 +18,27 @@ RSpec.feature 'Team adds a game', type: :feature do
 
     click_on 'Create Game'
 
-    expect(page).to have_content('31/07/2016')
+    expect(page).to have_content('07/31/2016')
     expect(page).to have_content('05:30PM')
     expect(page).to have_content('Lombardo')
   end
 
-  xscenario 'with invalid attributes' do
+  scenario 'with invalid attributes' do
     visit root_path
 
     click_on 'New Team'
-    fill_in 'Name', with: 'My Team'
+    fill_in 'Name', with: 'My Best Team'
     click_on 'Create Team'
 
-    click_on 'My Team'
+    click_on 'My Best Team'
     click_on 'Add Game'
 
-    fill_in 'Date', with: ''
     fill_in 'Time', with: '05:30PM'
     fill_in 'Field', with: 'Lombardo'
 
     click_on 'Create Game'
 
-    expect(page).to have_content('Date cannot be blank!')
+    expect(page).to have_content('Date can\'t be blank')
 
     fill_in 'Date', with: '31/07/2016'
     fill_in 'Time', with: ''
@@ -47,7 +46,7 @@ RSpec.feature 'Team adds a game', type: :feature do
 
     click_on 'Create Game'
 
-    expect(page).to have_content('Time cannot be blank!')
+    expect(page).to have_content('Time can\'t be blank')
 
     fill_in 'Date', with: '31/07/2016'
     fill_in 'Time', with: '05:30PM'
@@ -55,7 +54,7 @@ RSpec.feature 'Team adds a game', type: :feature do
 
     click_on 'Create Game'
 
-    expect(page).to have_content('Field cannot be blank!')
+    expect(page).to have_content('Field can\'t be blank')
   end
 
 end
