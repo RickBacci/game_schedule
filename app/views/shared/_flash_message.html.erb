@@ -1,8 +1,16 @@
 <div class="row">
   <div class="messages col-md-6 col-md-offset-3">
     <% flash.each do |key, value| %>
-        <%= content_tag :div, value, class: "card flash #{key} text-xs-center" %>
-    <% end %>
-  </div>
-</div>
+      <% if key == 'errors' %>
+        <% errors = value.keys.map { |key| key.titlecase + ' ' + value[key].first }.each { |message| puts message } %>
 
+        <% errors.each do |error| %>
+          <%= content_tag :div, error, class: "card flash text-xs-center validation_error" %>
+        <% end %>
+
+      <% else %>
+        <%= content_tag :div, value, class: "card flash #{key} text-xs-center" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
