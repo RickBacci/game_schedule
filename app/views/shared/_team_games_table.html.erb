@@ -1,0 +1,18 @@
+<div class="card-block table-responsive">
+
+  <table class='table'>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Field</th>
+    </tr>
+    <%- team.games.each do |game| %>
+      <tr>
+        <td><%= game.date.strftime("%m/%d/%Y") %></td>
+        <td><%= game.time.strftime("%I:%M%p") %></td>
+        <td><%= game.field %></td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>
