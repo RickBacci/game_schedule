@@ -1,0 +1,12 @@
+<div class="card-block table-responsive">
+  <table class='table'>
+    <tr>
+      <th>Name</th>
+    </tr>
+    <% teams.each do |team| %>
+      <tr>
+        <td><%= link_to team.name, team_path(team) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

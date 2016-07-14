@@ -22,18 +22,7 @@
         </div>
       </div>
 
-      <div class="card-block">
-        <table class='table'>
-          <tr>
-            <th>Name</th>
-          </tr>
-          <% @teams.each do |team| %>
-            <tr>
-              <td><%= link_to team.name, team_path(team) %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
+      <%= render partial: 'shared/teams_table', locals: { teams: @teams } %>
 
     </div>
   </div>
