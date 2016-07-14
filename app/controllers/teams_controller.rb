@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+
   def index
     @teams = Team.all
   end
@@ -26,6 +27,10 @@ class TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:name)
+  end
+
+  def client
+    current_user.google_calendar if current_user
   end
 
 end

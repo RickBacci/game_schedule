@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="messages col-md-6 col-md-offset-3">
+  <div class="messages col-xs-12 col-lg-6 col-lg-offset-3">
     <% flash.each do |key, value| %>
       <% if key == 'errors' %>
         <% errors = value.keys.map { |key| key.titlecase + ' ' + value[key].first }.each { |message| puts message } %>

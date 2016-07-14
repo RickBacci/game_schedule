@@ -7,5 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 50.times do
-  Team.create(name: Faker::Team.name)
+  team = Team.create(name: Faker::Team.name)
+  10.times do
+    Game.create(
+      team_id: team.id,
+      field:   Faker::StarWars.planet,
+      time:    Faker::Time.forward(14, :evening),
+      date:    Faker::Date.forward(23)
+    )
+  end
 end
