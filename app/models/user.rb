@@ -1,15 +1,14 @@
 class User < ApplicationRecord
   require 'google/apis/calendar_v3'
 
-  def self.from_omniauth(auth, role='client')
+  def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.provider         = auth.provider
-      user.uid              = auth.uid
-      user.name             = auth.info.name
-      user.token            = auth.credentials.token
-      user.refresh_token    = auth.credentials.refresh_token
-      user.expires_at       = Time.at(auth.credentials.expires_at).to_datetime
-      user.role             = role
+      user.provider       = auth.provider
+      user.uid            = auth.uid
+      user.name           = auth.info.name
+      user.token          = auth.credentials.token
+      user.refresh_token  = auth.credentials.refresh_token
+      user.expires_at     = Time.at(auth.credentials.expires_at).to_datetime
       user.save!
     end
   end
