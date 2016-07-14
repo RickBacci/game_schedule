@@ -10,6 +10,10 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'autoprefixer-rails'
 
+gem 'omniauth-google-oauth2'
+gem 'google-api-client'
+gem 'figaro'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
