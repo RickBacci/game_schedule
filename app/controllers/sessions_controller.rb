@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
 
   def create
+    reset_session
+
     session[:user_id] = user.id if user
 
     if current_user
@@ -13,7 +15,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    reset_session
+
     flash[:notice]    = 'You have successfully logged out.'
     redirect_to root_path
   end
