@@ -29,4 +29,8 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name)
   end
 
+  def client
+    current_user.google_calendar if current_user
+  end
+
 end
