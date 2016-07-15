@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
 
+  post '/new_team_calendar/:id', to: 'teams#create_calendar', as: 'new_team_calendar'
 
   root 'teams#index'
 

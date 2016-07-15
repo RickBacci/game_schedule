@@ -23,6 +23,26 @@ class TeamsController < ApplicationController
     end
   end
 
+  def create_calendar
+    @team = Team.find(params[:id])
+
+    calendar = Google::Apis::CalendarV3::Calendar.new(
+      summary: @team.name,
+      time_zone: 'America/New_York'
+    )
+
+    client.insert_calendar(calendar)
+
+    if response.status == 200
+      flash[:notice] = 'Calendar successfully created!'
+      redirect_to team_path(@team)
+    else
+      flash[:error] = 'Calendar creation unsuccessful!'
+      redirect_to team_path(@team)
+    end
+
+  end
+
   private
 
   def team_params
