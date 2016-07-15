@@ -22,6 +22,7 @@
             Current games
           </div>
           <div class="col-md-6">
+            <%= link_to 'Create Calendar', new_team_calendar_path(@team), method: :post %>
             <%= link_to 'Add Game', new_team_game_path(@team), class: 'pull-xs-right' %>
           </div>
         </div>
