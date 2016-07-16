@@ -30,17 +30,42 @@ class TeamsController < ApplicationController
       summary: @team.name,
       time_zone: 'America/New_York'
     )
+    if @team.calendar_id.nil?
+      result = client.insert_calendar(calendar)
 
-    client.insert_calendar(calendar)
+      @team.update(calendar_id: result.id)
 
-    if response.status == 200
-      flash[:notice] = 'Calendar successfully created!'
+      @team.games.each do |game|
+        time = game.time.to_i
+
+        event = Google::Apis::CalendarV3::Event.new(
+          {
+            summary: 'Game against',
+            location: game.field,
+            description: 'none',
+            start: {
+              date_time: Time.at(time).utc.iso8601,
+              time_zone: 'America/New_York',
+            },
+            end: {
+              date_time: Time.at(time).utc.iso8601,
+              time_zone: 'America/New_York',
+            }
+          }
+        )
+        result = client.insert_event(@team.calendar_id, event)
+
+        puts "Event created: #{result.html_link}"
+      end
+    end
+
+    if result
+      flash[:notice] = create_calendar_flash(@team)
       redirect_to team_path(@team)
     else
       flash[:error] = 'Calendar creation unsuccessful!'
       redirect_to team_path(@team)
     end
-
   end
 
   private
@@ -53,4 +78,9 @@ class TeamsController < ApplicationController
     current_user.google_calendar if current_user
   end
 
+  def create_calendar_flash(team)
+    size = team.games.size
+
+   "Calendar with #{size} #{size == 1 ? 'game':'games'} was successfully created!"
+  end
 end
