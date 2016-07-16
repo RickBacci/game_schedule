@@ -81,6 +81,6 @@ class TeamsController < ApplicationController
   def create_calendar_flash(team)
     size = team.games.size
 
-   "Calendar with #{@team.games.size} #{size == 1 ? 'game':'games'} was successfully created!"
+   "Calendar with #{size} #{size == 1 ? 'game':'games'} was successfully created!"
   end
 end
