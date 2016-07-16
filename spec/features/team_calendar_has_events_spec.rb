@@ -9,26 +9,29 @@ RSpec.feature 'User', type: :feature do
   end
 
   scenario 'can add events to the calendar' do
-    visit root_path
-    click_on 'Login'
 
-    click_on 'New Team'
-    fill_in 'Name', with: 'My Awesome Team'
-    click_on 'Create Team'
+    VCR.use_cassette("calendar_with_events") do
+      visit root_path
+      click_on 'Login'
 
-    click_on 'My Awesome Team'
-    click_on 'Add Game'
+      click_on 'New Team'
+      fill_in 'Name', with: 'My Awesome Team'
+      click_on 'Create Team'
 
-    fill_in 'Date', with: '31/07/2016'
-    fill_in 'Time', with: '05:30PM'
-    fill_in 'Field', with: 'Lombardo'
+      click_on 'My Awesome Team'
+      click_on 'Add Game'
 
-    click_on 'Create Game'
+      fill_in 'Date', with: '31/07/2016'
+      fill_in 'Time', with: '05:30PM'
+      fill_in 'Field', with: 'Lombardo'
 
-    click_on 'Create Calendar'
+      click_on 'Create Game'
 
-    expect(page).to have_content('Calendar with 1 game was successfully created!')
+      click_on 'Create Calendar'
 
+      expect(page).to have_content('Calendar with 1 game was successfully created!')
+
+    end
   end
 end
 

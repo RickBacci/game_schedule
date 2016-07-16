@@ -8,15 +8,17 @@ RSpec.feature 'User', type: :feature do
   end
 
   scenario 'can create and destroy a session' do
-    visit root_path
 
-    click_on 'Login'
+    VCR.use_cassette("user_create_and_destroy_session") do
+      visit root_path
 
-    expect(page).to have_link('Logout')
+      click_on 'Login'
 
-    click_on 'Logout'
+      expect(page).to have_link('Logout')
 
-    expect(page).to have_link('Login')
+      click_on 'Logout'
+
+      expect(page).to have_link('Login')
+    end
   end
-
 end
