@@ -23,24 +23,6 @@ class User < ApplicationRecord
     }
   end
 
-  def request_token_from_google
-    url = URI("https://www.googleapis.com/oauth2/v3/token")
-    Net::HTTP.post_form(url, self.to_params)
-  end
-
-  def refresh!
-    response = request_token_from_google
-    data     = JSON.parse(response.body)
-
-    update_attributes(
-      token: data['access_token'],
-      expires_at: calculate_token_expiration_time(data))
-  end
-
-  def expired?
-    expires_at <= Time.now
-  end
-
   def fresh_token
     refresh! if expired?
     token
@@ -58,5 +40,23 @@ class User < ApplicationRecord
 
   def calculate_token_expiration_time(data)
     Time.now + (data['expires_in'].to_i).seconds
+  end
+
+  def refresh!
+    response = request_token_from_google
+    data     = JSON.parse(response.body)
+
+    update_attributes(
+      token: data['access_token'],
+      expires_at: calculate_token_expiration_time(data))
+  end
+
+  def expired?
+    expires_at <= Time.now
+  end
+
+  def request_token_from_google
+    url = URI("https://www.googleapis.com/oauth2/v3/token")
+    Net::HTTP.post_form(url, self.to_params)
   end
 end
