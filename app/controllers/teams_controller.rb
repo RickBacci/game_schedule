@@ -60,7 +60,7 @@ class TeamsController < ApplicationController
     end
 
     if result
-      flash[:notice] = 'Calendar successfully created!'
+      flash[:notice] = create_calendar_flash(@team)
       redirect_to team_path(@team)
     else
       flash[:error] = 'Calendar creation unsuccessful!'
@@ -78,4 +78,9 @@ class TeamsController < ApplicationController
     current_user.google_calendar if current_user
   end
 
+  def create_calendar_flash(team)
+    size = team.games.size
+
+   "Calendar with #{@team.games.size} #{size == 1 ? 'game':'games'} was successfully created!"
+  end
 end
