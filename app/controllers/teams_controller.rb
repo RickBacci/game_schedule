@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  require 'google/apis/calendar_v3'
 
   def index
     @teams = Team.all
