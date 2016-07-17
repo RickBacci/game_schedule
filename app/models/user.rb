@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  require 'google/apis/calendar_v3'
+  require 'net/http'
+  require 'json'
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -13,11 +14,49 @@ class User < ApplicationRecord
     end
   end
 
+  def to_params
+    {
+      refresh_token: refresh_token,
+      client_id:     ENV['GOOGLE_CLIENT_ID'],
+      client_secret: ENV['GOOGLE_CLIENT_SECRET'],
+      grant_type:    'refresh_token'
+    }
+  end
+
+  def fresh_token
+    refresh! if expired?
+    token
+  end
+
   def google_calendar
     calendar = Google::Apis::CalendarV3::CalendarService.new
 
-    calendar.authorization = token
-    # calendar.request_options.authorization = token
+    calendar.authorization = self.fresh_token
     calendar
+  end
+
+
+  private
+
+  def calculate_token_expiration_time(data)
+    Time.now + (data['expires_in'].to_i).seconds
+  end
+
+  def refresh!
+    response = request_token_from_google
+    data     = JSON.parse(response.body)
+
+    update_attributes(
+      token: data['access_token'],
+      expires_at: calculate_token_expiration_time(data))
+  end
+
+  def expired?
+    expires_at <= Time.now
+  end
+
+  def request_token_from_google
+    url = URI("https://www.googleapis.com/oauth2/v3/token")
+    Net::HTTP.post_form(url, self.to_params)
   end
 end

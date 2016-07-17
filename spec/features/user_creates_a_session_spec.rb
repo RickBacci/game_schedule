@@ -8,6 +8,7 @@ RSpec.feature 'User', type: :feature do
   end
 
   scenario 'can create and destroy a session' do
+
     visit root_path
 
     click_on 'Login'
@@ -18,5 +19,4 @@ RSpec.feature 'User', type: :feature do
 
     expect(page).to have_link('Login')
   end
-
 end

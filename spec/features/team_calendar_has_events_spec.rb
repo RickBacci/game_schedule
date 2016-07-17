@@ -9,6 +9,7 @@ RSpec.feature 'User', type: :feature do
   end
 
   scenario 'can add events to the calendar' do
+
     visit root_path
     click_on 'Login'
 
@@ -28,7 +29,6 @@ RSpec.feature 'User', type: :feature do
     click_on 'Create Calendar'
 
     expect(page).to have_content('Calendar with 1 game was successfully created!')
-
   end
 end
 
