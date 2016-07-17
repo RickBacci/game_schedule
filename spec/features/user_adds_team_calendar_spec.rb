@@ -9,22 +9,20 @@ RSpec.feature 'User', type: :feature do
   end
 
   scenario 'can add a calendar to their account' do
-    VCR.use_cassette('user_creates_calendar') do
 
-      visit root_path
-      click_on 'Login'
+    visit root_path
+    click_on 'Login'
 
-      click_on 'New Team'
-      fill_in 'Name', with: 'My Awesome Team'
-      click_on 'Create Team'
+    click_on 'New Team'
+    fill_in 'Name', with: 'My Awesome Team'
+    click_on 'Create Team'
 
-      expect(page).to have_link('My Awesome Team')
+    expect(page).to have_link('My Awesome Team')
 
-      click_on 'My Awesome Team'
-      click_on 'Create Calendar'
+    click_on 'My Awesome Team'
+    click_on 'Create Calendar'
 
-      expect(page).to have_content('Calendar with 0 games was successfully created!')
-    end
+    expect(page).to have_content('Calendar with 0 games was successfully created!')
   end
 end
 
