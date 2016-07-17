@@ -6,20 +6,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
-require 'webmock/rspec'
-require 'vcr'
-
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/vcr_cassettes"
-  config.allow_http_connections_when_no_cassette = true
-  config.hook_into :webmock
-  config.cassette_serializers()
-  config.filter_sensitive_data('<GOOGLE_CLIENT_ID>')    { ENV['GOOGLE_CLIENT_ID'] }
-  config.filter_sensitive_data('<GOOGLE_CLIENT_SECRET') { ENV['GOOGLE_CLIENT_SECRET'] }
-  config.filter_sensitive_data('<GOOGLE_TEST_TOKEN>')   { ENV['token'] }
-  config.before_record do |r| r.request.headers.delete("Authorization") end
-end
-
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
