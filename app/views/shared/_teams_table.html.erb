@@ -1,12 +1,15 @@
-<div class="card-block table-responsive">
-  <table class='table'>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--16dp full-width">
+  <thead>
     <tr>
-      <th>Name</th>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
     </tr>
+  </thead>
+  <tbody>
     <% teams.each do |team| %>
       <tr>
-        <td><%= link_to team.name, team_path(team) %></td>
+        <td><%= link_to team.name, team_path(team), class: 'mdl-button mdl-js-button mdl-js-ripple-effect center-inline' %></td>
       </tr>
     <% end %>
-  </table>
-</div>
+  </tbody>
+</table>
+

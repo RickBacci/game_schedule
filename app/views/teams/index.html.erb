@@ -1,29 +1,21 @@
-<div class="row">
+<div class="mdl-card mdl-shadow--16dp full-width">
 
-  <div class="col-xs-12 col-lg-6 col-lg-offset-3">
-    <div class="teams card card-inverse" style="background-color: #333; border-color: #xxx;">
-
-      <div class="card-block text-md-right">
-        <% if current_user %>
-          <%= link_to 'Logout', logout_path %>
-        <% else %>
-          <%= link_to 'Login', login_path %>
-        <% end %>
-      </div>
-
-      <div class="card-block">
-        <div class="row">
-          <div class="col-md-6">
-            <h4 class="card-title">Teams</h4>
-          </div>
-          <div class="col-md-6">
-            <%= link_to 'New Team', new_team_path, class: 'pull-xs-right' %>
-          </div>
-        </div>
-      </div>
-
-      <%= render partial: 'shared/teams_table', locals: { teams: @teams } %>
-
-    </div>
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Teams</h2>
+    <div class="mdl-layout-spacer"></div>
+    <%= link_to 'New Team', new_team_path, class: 'mdl-button mdl-js-button mdl-js-ripple-effect' %>
   </div>
+
+  <%= render partial: 'shared/teams_table', locals: { teams: @teams } %>
+</div>
+
+
+
+
+
+
+
+
+
+
 

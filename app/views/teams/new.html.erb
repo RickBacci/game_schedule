@@ -1,35 +1,28 @@
-<div class="row">
-  <div class="col-xs-12 col-lg-6 col-lg-offset-3">
-    <div class="card">
-
-      <div class="card-block">
-        <div class="row">
-          <div class="col-md-6">
-            <h4 class="card-title">New Team</h4>
-          </div>
-          <div class="col-md-6">
-            <%= link_to 'back', teams_path, class: 'pull-xs-right' %>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="card-block">
-        <%= form_for @team do |f| %>
-          <div class='form-group'>
-            <%= f.label :name, class: 'text-center' %>
-            <%= f.text_field :name, class: 'form-control' %>
-            <br>
-            <%= f.submit 'Create Team', class: "form-control btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-
-      <% if @team.errors.any? %>
-        <%= render partial: 'shared/validation_errors', locals: { model: @team} %>
-      <% end %>
-
-    </div>
+<div class="mdl-card mdl-shadow--16dp full-width">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">New Team</h2>
   </div>
+
+  <%= form_for @team do |f| %>
+
+
+    <div class="mdl-card__supporting-text">
+      <div class="mdl-textfield mdl-js-textfield">
+        <%= f.label :name, class: 'mdl-textfield__label' %>
+        <%= f.text_field :name, class: 'mdl-textfield__input' %>
+      </div>
+    </div>
+
+    <div class="mdl-card__actions mdl-card--border">
+      <div class="mdl-layout-spacer"></div>
+      <%= link_to 'cancel', teams_path, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' %>
+      <%= f.submit 'Create Team', class: "mdl-button mdl-js-button mdl-button--raised" %>
+    </div>
+  <% end %>
+
+
+  <% if @team.errors.any? %>
+    <%= render partial: 'shared/validation_errors', locals: { model: @team} %>
+  <% end %>
 </div>
 

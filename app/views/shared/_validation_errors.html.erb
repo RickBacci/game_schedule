@@ -1,13 +1,8 @@
-<div class="card-block validation_error">
-  <div class="card-text">
+<%= pluralize(model.errors.count, "error") %> prohibited this <%= model.model_name.human %> from being saved:
 
-    <%= pluralize(model.errors.count, "error") %> prohibited this <%= model.model_name.human %> from being saved:
+<ul>
+  <% model.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
 
-    <ul>
-      <% model.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-
-  </div>
-</div>
